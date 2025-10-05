@@ -38,113 +38,76 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new 
-        IntersectionObserver(function(entries) { 
-            entries.forEach(entry => { 
-                if (entry.isIntersecting) { 
-                    entry.target.classList.add('fade-in-up'); 
-                    observer.unobserve(entry.target); 
-                } 
-            }); 
-        }, observerOptions); 
-    // Observe elements for animation 
-    const animatedElements = document.querySelectorAll('.pain-point, .step, .pricing-card, .how-step'); 
-    animatedElements.forEach(el => 
-        observer.observe(el)); 
-    // Form handling 
-    const contactForm = document.getElementById('contactForm'); 
-    if (contactForm) { 
-        contactForm.addEventListener('submit', 
-        function(e) { 
-            e.preventDefault(); 
-            
-    // Get form data 
-    const formData = new FormData(this); 
-    const nombre = formData.get('nombre'); 
-    const email = formData.get('email'); 
-    const whatsapp = formData.get('whatsapp'); 
-    
-    // Basic validation 
-    if (!nombre || !email || !whatsapp) { 
-        showNotification('Por favor, completa todos los campos requeridos.', 'error'); 
-        return; 
-    } 
-    
-    if (!isValidEmail(email)) { 
-        showNotification('Por favor, ingresa un correo electrónico válido.', 'error'); 
-        return; 
-    } 
-    
-    if (!isValidPhone(whatsapp)) { 
-        showNotification('Por favor, ingresa un número de WhatsApp válido.', 'error'); 
-        return; 
-    } 
-        
-    // Simulate form submission 
-    const submitButton = this.querySelector('button[type="submit"]'); 
-    const originalText = submitButton.innerHTML; 
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...'; submitButton.disabled = true; 
-            
-    // Simulate API call 
-    setTimeout(() => { 
-        showNotification('¡Gracias! Tu solicitud ha sido enviada. Te contactaremos pronto.', 'success'); 
-        contactForm.reset(); 
-        submitButton.innerHTML = originalText; 
-        submitButton.disabled = false; 
-        
-    // Redirect to WhatsApp (optional) 
-    const message = encodeURIComponent(Hola, soy ${nombre}. Me interesa la evaluación gratuita de TCC. Mi email es ${email}.); 
-            const whatsappUrl = https://wa.me/${525638263959}?text=${message}; 
-                
-    // Show option to continue to WhatsApp 
-    setTimeout(() => { 
-        if (confirm('¿Te gustaría continuar la conversación por WhatsApp?')) { 
-            window.open(whatsappUrl, '_blank'); 
-        } 
-    }, 2000); 
-}, 2000); 
-});
-}
- /*else {
-                        showNotification('Enviando tu registro por correo...', 'info');
-                        
-                        const payload = { nombre, email, whatsapp, ownerEmail: 'santramzbunny82@gmail.com' };
-                        const controller = new AbortController();
-                        const timeoutMs = 8000;
-                        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
-                    try {
-                        const res = await fetch('/api/registro', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                        signal: controller.signal
-                        });
-                    
-                        clearTimeout(timeoutId);
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.pain-point, .step, .pricing-card, .how-step');
+    animatedElements.forEach(el => observer.observe(el));
 
-                        const data = await res.json().catch(() => null);
-                    
-                        if (res.ok && data && data.success) {
-                            showNotification('Registro recibido. Te contactaremos pronto.', 'success');
-                        } else {
-                            const errMsg = (data && data.error) ? data.error : `Respuesta del servidor: ${res.status}`;
-                            showNotification(`Error al enviar registro: ${errMsg}`, 'error');
-                            console.error('Error al enviar registro:', data || res);
-                        }
-                    } catch (err) {
-                    
-                clearTimeout(timeoutId);
+    // Form handling
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const nombre = formData.get('nombre');
+            const email = formData.get('email');
+            const whatsapp = formData.get('whatsapp');
+            
+            // Basic validation
+            if (!nombre || !email || !whatsapp) {
+                showNotification('Por favor, completa todos los campos requeridos.', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showNotification('Por favor, ingresa un correo electrónico válido.', 'error');
+                return;
+            }
+            
+            if (!isValidPhone(whatsapp)) {
+                showNotification('Por favor, ingresa un número de WhatsApp válido.', 'error');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
+            submitButton.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                showNotification('¡Gracias! Tu solicitud ha sido enviada. Te contactaremos pronto.', 'success');
+                contactForm.reset();
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
                 
-                if (err.name === 'AbortError') {
-                    showNotification('El envío tardó demasiado y fue cancelado. Intenta de nuevo más tarde.', 'error');
-                } else {
-                showNotification('No se pudo enviar el registro. Intenta más tarde.', 'error');
-                }
-                console.error('Fetch error al enviar registro:', err);
-                }
-            }*/
-                          
+                // Redirect to WhatsApp (optional)
+                const message = encodeURIComponent(`Hola Erika, soy ${nombre}\n` +, `Teléfono/WhatsApp: ${whatsapp}` . Estoy interesado(a) en la evaluación gratuita de TCC. Mi email es ${email}.`);
+                const whatsappUrl = `https://wa.me/${525638263959}?text=${message}`;
+                
+                // Show option to continue to WhatsApp
+                setTimeout(() => {
+                    if (confirm('¿Te gustaría continuar la conversación por WhatsApp?')) {
+                        window.open(whatsappUrl, '_blank');
+                    }
+                }, 2000);
+                
+            }, 2000);
+        });
+    }
+
     // CTA button click tracking
     const ctaButtons = document.querySelectorAll('.cta-button');
     ctaButtons.forEach(button => {
@@ -449,3 +412,4 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
