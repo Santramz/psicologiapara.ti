@@ -144,12 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Fetch error al enviar registro:', err);
                 }
             }*/
-            }, 2000);
-                
-            }, 2000);
-        });
-    }
-
+                          
     // CTA button click tracking
     const ctaButtons = document.querySelectorAll('.cta-button');
     ctaButtons.forEach(button => {
