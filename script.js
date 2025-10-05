@@ -98,10 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const urlWhatsapp = `https://wa.me/${525638263959}?text=${mensaje}`;
                 
                 // Show option to continue to WhatsApp
-                setTimeout(async () => {
+                setTimeout( () => { //async
                     if (confirm('¿Te gustaría continuar la conversación por WhatsApp?')) {
                         window.open(urlWhatsapp, '_blank');
-                    } else {
+                    } /*else {
                         showNotification('Enviando tu registro por correo...', 'info');
                         
                         const payload = { nombre, email, whatsapp, ownerEmail: 'santramzbunny82@gmail.com' };
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 console.error('Fetch error al enviar registro:', err);
                 }
-            }
+            }*/
             }, 2000);
                 
             }, 2000);
